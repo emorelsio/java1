@@ -1,5 +1,7 @@
 package org.ldv.sio;
 
+import java.util.Objects;
+
 public class Adresse {
 
     private String nom;
@@ -46,8 +48,24 @@ public class Adresse {
         this.codePostal = codePostal;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adresse adresse = (Adresse) o;
+        return Objects.equals(nom, adresse.nom) &&
+                Objects.equals(rue, adresse.rue) &&
+                Objects.equals(ville, adresse.ville) &&
+                Objects.equals(codePostal, adresse.codePostal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, rue, ville, codePostal);
+    }
+
     public String toAdresse() {
-        return "Adresse: {" +
+        return "Adresse : {" +
                 "nom='" + nom + '\'' +
                 ", rue='" + rue + '\'' +
                 ", code postal='" + codePostal + '\'' +
